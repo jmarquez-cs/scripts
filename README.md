@@ -1,3 +1,5 @@
+[![Test Scripts](https://github.com/ScooterHelmet/scripts/actions/workflows/test-scripts.yml/badge.svg)](https://github.com/ScooterHelmet/scripts/actions/workflows/test-scripts.yml)
+
 ### To use `create_go_project_layout.sh`, follow these steps:
 
 -    Give the script execution permission by running `chmod +x create_go_project_layout.sh`.  
