@@ -1,0 +1,42 @@
+name: Test Scripts
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-go-project-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Give execute permission to the Go script
+      run: chmod +x create_go_project_layout.sh
+
+    - name: Run the Go script
+      run: ./create_go_project_layout.sh test-go-project
+
+    - name: Check if test-go-project directory was created
+      run: test -d test-go-project
+
+  test-terraform-project-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Give execute permission to the Terraform script
+      run: chmod +x create_terraform_project_layout.sh
+
+    - name: Run the Terraform script
+      run: ./create_terraform_project_layout.sh test-terraform-project
+
+    - name: Check if test-terraform-project directory was created
+      run: test -d test-terraform-project
