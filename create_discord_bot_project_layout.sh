@@ -24,7 +24,7 @@ A professional Discord bot project created with TypeScript.
 
 ## Project Structure
 
-\`\`\`
+\`\`\`console
 $PROJECT_NAME/
 │
 ├── src/
