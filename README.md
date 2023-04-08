@@ -122,3 +122,27 @@ envoy-project/
 -    Make the script executable by running `chmod +x create_discord_bot_project_layout.sh`
 -    Execute the script by running `./create_discord_bot_project_layout.sh <project-name>`, replacing `<project-name>` with the desired project name.
 -    This script creates the directory structure and basic files for a Discord Bot project. You can customize and expand the script as needed for your specific project requirements. Don't forget to fill in the actual content in the configuration files and update the README.md file to provide specific instructions for your project.
+
+output:
+```console
+discord-bot-project/
+│
+├── src/
+│   ├── commands/
+│   ├── events/
+│   ├── interfaces/
+│   ├── models/
+│   ├── structures/
+│   ├── utils/
+│   └── index.ts
+│
+├── test/
+│
+├── .gitignore
+├── .editorconfig
+├── .eslintrc.json
+├── .prettierrc.json
+├── tsconfig.json
+├── package.json
+└── .env
+```
