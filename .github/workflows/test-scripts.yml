@@ -64,11 +64,28 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Give execute permission to the Envoy script
+    - name: Give execute permission to the Discord bot script
       run: chmod +x create_discord_bot_project_layout.sh
 
-    - name: Run the Envoy script
-      run: ./create_envoy_project_layout.sh test-discord-bot-project
+    - name: Run the Discord bot script
+      run: ./create_discord_bot_project_layout.sh test-discord-bot-project
 
-    - name: Check if test-envoy-project directory was created
+    - name: Check if test-discord-bot-project directory was created
       run: test -d test-discord-bot-project
+
+
+  test-k8s-project-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Give execute permission to the Kubernetes script
+      run: chmod +x create_k8s_project_layout.sh
+
+    - name: Run the Envoy script
+      run: ./create_k8s_project_layout.sh test-k8s-project
+
+    - name: Check if test-k8s-project directory was created
+      run: test -d test-k8s-project

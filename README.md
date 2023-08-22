@@ -146,3 +146,30 @@ discord-bot-project/
 ├── package.json
 └── .env
 ```
+
+## To use `create_k8s_project_layout.sh`, follow these steps:
+-    Make the script executable by running `chmod +x create_k8s_project_layout.sh`
+-    Execute the script by running `./create_k8s_project_layout.sh <project-name>`, replacing `<project-name>` with the desired project name.
+-    This script creates the directory structure and basic files for a Kubernetes project. You can customize and expand the script as needed for your specific project requirements. Don't forget to fill in the actual content in the configuration files and update the README.md file to provide specific instructions for your project.
+
+output:
+```console
+k8s-project/
+│
+├── configmaps/
+├── deployments/
+│   ├── app/
+│   └── db/
+├── helm-charts/
+│   ├── app/
+│       └── templates/
+│   └── db/
+│       └── templates/
+├── ingress/
+├── scripts/
+├── secrets/
+├── services/
+│   ├── app/
+│   └── db/
+└── README.md
+```
