@@ -2,21 +2,30 @@
 
 # Check if a project name is provided
 if [ -z "$1" ]; then
-    echo "Usage: ./create_go_project_layout.sh <project-name>"
+    echo "Usage: ./create_go_project_layout.sh <project-name> [module...]"
     exit 1
 fi
 
 PROJECT_NAME="$1"
+shift  # Remove the first argument, which is the project name
 
-# Create directories
-mkdir -p "${PROJECT_NAME}/cmd/app"
-mkdir -p "${PROJECT_NAME}/pkg/module1"
-mkdir -p "${PROJECT_NAME}/pkg/module2"
-mkdir -p "${PROJECT_NAME}/internal/util"
-mkdir -p "${PROJECT_NAME}/internal/config"
-mkdir -p "${PROJECT_NAME}/api/proto"
-mkdir -p "${PROJECT_NAME}/configs"
-mkdir -p "${PROJECT_NAME}/scripts"
+# Function to create a directory and handle errors
+create_dir() {
+    mkdir -p "$1" || { echo "Failed to create directory $1"; exit 1; }
+}
+
+# Create base directories
+create_dir "${PROJECT_NAME}/cmd/app"
+create_dir "${PROJECT_NAME}/internal/util"
+create_dir "${PROJECT_NAME}/internal/config"
+create_dir "${PROJECT_NAME}/api/proto"
+create_dir "${PROJECT_NAME}/configs"
+create_dir "${PROJECT_NAME}/scripts"
+
+# Create module directories from additional arguments
+for module in "$@"; do
+    create_dir "${PROJECT_NAME}/pkg/${module}"
+done
 
 # Create main.go file
 echo 'package main
@@ -39,7 +48,7 @@ bin/
 .vscode/' > "${PROJECT_NAME}/.gitignore"
 
 # Create Dockerfile
-echo 'FROM golang:1.17-alpine
+echo 'FROM golang:1.18-alpine
 
 WORKDIR /app
 
@@ -66,7 +75,7 @@ services:
 # Create go.mod file
 echo "module ${PROJECT_NAME}
 
-go 1.17" > "${PROJECT_NAME}/go.mod"
+go 1.18" > "${PROJECT_NAME}/go.mod"
 
 # Create README.md file
 echo "# ${PROJECT_NAME}
@@ -75,7 +84,7 @@ This is a Go project with a standard layout.
 
 ## How to build and run
 
-1. Build the project using \`go build -o bin/app ./cmd/app\`
+1. Build the project using \`go build -o bin/app ./cmd/app/\`
 2. Run the compiled binary: \`./bin/app\`
 
 ## Docker
@@ -84,5 +93,12 @@ This is a Go project with a standard layout.
 2. Run the Docker container: \`docker-compose up\`
 
 " > "${PROJECT_NAME}/README.md"
+
+# Create go.work file for Go 1.18
+echo "go 1.18
+
+use (
+    .
+)" >> "${PROJECT_NAME}/go.work"
 
 echo "Go project layout for ${PROJECT_NAME} has been created successfully."
